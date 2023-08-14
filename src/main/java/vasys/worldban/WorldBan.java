@@ -1,5 +1,6 @@
 package vasys.worldban;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -14,17 +15,19 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 public class WorldBan extends JavaPlugin implements Listener {
 
+    HashMap<UUID, PermissionAttachment> perms = new HashMap<UUID, PermissionAttachment>();
     List<String> worlds = new ArrayList<>();
     World lobbyWorld = getServer().getWorld(getConfig().getString("lobby"));
     Location lobby = new Location(lobbyWorld, getConfig().getDouble("lobbyCordX"), getConfig().getDouble("lobbyCordY"), getConfig().getDouble("lobbyCordZ"));
     @Override
     public void onEnable() {
         saveDefaultConfig();
-        this.getCommand("worldban").setExecutor(new WorldBan());
         getServer().getPluginManager().registerEvents(this, this);
         worlds = getConfig().getStringList("worldList");
     }
@@ -87,20 +90,20 @@ public class WorldBan extends JavaPlugin implements Listener {
                     return false;
                 }
             }
-            Player player = getServer().getPlayer(lable);
+            Player player = getServer().getPlayer(args[0]);
             PermissionAttachment attachment = player.addAttachment(this);
 
             if (getConfig().getBoolean("worldListIsWhiteList")) {
-                if (worlds.contains(args[0])) {
-                    String permission = "worldban.world." + args[0];
-                    if (getConfig().getString(args[0]) != null) permission = getConfig().getString(args[0]);
+                if (worlds.contains(args[1])) {
+                    String permission = "worldban.world." + args[1];
+                    if (getConfig().getString(args[1]) != null) permission = getConfig().getString(args[0]);
                     attachment.setPermission(permission, false);
                 }
             }
             else {
-                if (worlds.contains(args[0])) {
-                    String permission = "worldban.world." + args[0];
-                    if (getConfig().getString(args[0]) != null) permission = getConfig().getString(args[0]);
+                if (worlds.contains(args[1])) {
+                    String permission = "worldban.world." + args[1];
+                    if (getConfig().getString(args[1]) != null) permission = getConfig().getString(args[0]);
                     attachment.setPermission(permission, true);
                 }
             }
