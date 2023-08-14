@@ -7,7 +7,7 @@ public final class WorldBan extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        System.out.println("Enabling WorldBan v${project.version}");
+        System.out.println("Enabling WorldBan " + getPluginMeta().getVersion());
     }
 
     @Override
