@@ -101,7 +101,9 @@ public class WorldBan extends JavaPlugin implements Listener {
                 }
                 send.sendRawMessage(args[0] + getConfig().getString("banPlayerMessage") + args[1]);
                 Player player = getServer().getPlayer(args[0]);
-                player.teleport(lobby);
+                if (player.getWorld().getName() == args[1]) {
+                    player.teleport(lobby);
+                }
                 if (player != null) {
                     player.sendRawMessage(getConfig().getString("banMessage") + args[1]);
                 }
@@ -131,7 +133,9 @@ public class WorldBan extends JavaPlugin implements Listener {
                 }
                 send.sendRawMessage(args[0] + getConfig().getString("pardonPlayerMessage") + args[1]);
                 Player player = getServer().getPlayer(args[0]);
-                player.teleport(lobby);
+                if (player.getWorld().getName() == args[1]) {
+                    player.teleport(lobby);
+                }
                 if (player != null) {
                     player.sendRawMessage(getConfig().getString("pardonMessage") + args[1]);
                 }
