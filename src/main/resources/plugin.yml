@@ -1,0 +1,4 @@
+name: WorldBan
+version: '${project.version}'
+main: vasys.worldban.WorldBan
+api-version: '1.20'
