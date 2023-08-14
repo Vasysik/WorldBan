@@ -79,9 +79,10 @@ public class WorldBan extends JavaPlugin implements Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
         if (command.getName().equalsIgnoreCase("worldban")) {
-            Player send = (Player) sender;
+            Player send = null;
+            if (getServer().getPlayer(sender.getName()) != null) send = getServer().getPlayer(sender.getName());
             if (sender instanceof Player) {
-                if (!send.hasPermission("worldban.worldban")) {
+                if (!send.hasPermission("worldban.worldban") & send != null) {
                     send.sendRawMessage(getConfig().getString("noPermission"));
                     return true;
                 }
@@ -99,21 +100,22 @@ public class WorldBan extends JavaPlugin implements Listener {
                 else {
                     comand = "lp user " + args[0] + " permission set " + permission + " true";
                 }
-                send.sendRawMessage(args[0] + getConfig().getString("banPlayerMessage") + args[1]);
+                if (send != null) send.sendRawMessage(args[0] + getConfig().getString("banPlayerMessage") + args[1]);
                 Player player = getServer().getPlayer(args[0]);
-                if (player.getWorld().getName() == args[1]) {
-                    player.teleport(lobby);
-                }
                 if (player != null) {
                     player.sendRawMessage(getConfig().getString("banMessage") + args[1]);
+                    if (player.getWorld() == getServer().getWorld(args[1])) {
+                        player.teleport(lobby);
+                    }
                 }
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), comand);
             }
         }
         if (command.getName().equalsIgnoreCase("worldpardon")) {
-            Player send = (Player) sender;
+            Player send = null;
+            if (getServer().getPlayer(sender.getName()) != null) send = getServer().getPlayer(sender.getName());
             if (sender instanceof Player) {
-                if (!send.hasPermission("worldban.worldpardon")) {
+                if (!send.hasPermission("worldban.worldpardon") & send != null) {
                     send.sendRawMessage(getConfig().getString("noPermission"));
                     return true;
                 }
@@ -131,11 +133,8 @@ public class WorldBan extends JavaPlugin implements Listener {
                 else {
                     comand = "lp user " + args[0] + " permission set " + permission + " false";
                 }
-                send.sendRawMessage(args[0] + getConfig().getString("pardonPlayerMessage") + args[1]);
+                if (send != null) send.sendRawMessage(args[0] + getConfig().getString("pardonPlayerMessage") + args[1]);
                 Player player = getServer().getPlayer(args[0]);
-                if (player.getWorld().getName() == args[1]) {
-                    player.teleport(lobby);
-                }
                 if (player != null) {
                     player.sendRawMessage(getConfig().getString("pardonMessage") + args[1]);
                 }

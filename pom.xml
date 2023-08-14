@@ -6,7 +6,7 @@
 
     <groupId>vasys</groupId>
     <artifactId>WorldBan</artifactId>
-    <version>1.13.4-BETA</version>
+    <version>1.13.8-BETA</version>
     <packaging>jar</packaging>
 
     <name>WorldBan</name>
