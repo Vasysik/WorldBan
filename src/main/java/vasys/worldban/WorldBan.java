@@ -83,11 +83,15 @@ public class WorldBan extends JavaPlugin implements Listener {
             if (sender instanceof Player) {
                 Player send = (Player) sender;
                 if (!send.hasPermission("worldban.worldban")) {
-                    return false;
+                    send.sendRawMessage("У вас нет прав на выполнение этой команды.");
+                    return true;
                 }
             }
             Player player = getServer().getPlayer(args[0]);
             PermissionAttachment attachment = player.addAttachment(this);
+            if (args.length != 2) {
+                return false;
+            }
             if (worlds.contains(args[1])) {
                 String permission = "worldban.world." + args[1];
                 if (getConfig().getString(args[1]) != null) permission = getConfig().getString(args[1]);
@@ -105,10 +109,13 @@ public class WorldBan extends JavaPlugin implements Listener {
             if (sender instanceof Player) {
                 Player send = (Player) sender;
                 if (!send.hasPermission("worldban.worldpardon")) {
-                    return false;
+                    send.sendRawMessage("У вас нет прав на выполнение этой команды.");
+                    return true;
                 }
             }
-
+            if (args.length != 2) {
+                return false;
+            }
             if (worlds.contains(args[1])) {
                 String permission = "worldban.world." + args[1];
                 if (getConfig().getString(args[1]) != null) permission = getConfig().getString(args[1]);
