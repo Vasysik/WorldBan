@@ -1,5 +1,4 @@
 worldList:
-  - 'world'
   - 'world_nether'
   - 'world_the_end'
 
@@ -10,9 +9,11 @@ lobby: 'world'
 lobbyCordX: 0
 lobbyCordY: 0
 lobbyCordZ: 0
+
 banMessage: 'Вы забанены в мире '
-banPlayerMessage: '%player% забанен в мире '
+banPlayerMessage: ' забанен в мире '
 pardonMessage: 'Вы разбанены в мире '
-pardonPlayerMessage: '%player% разбанен в мире '
+pardonPlayerMessage: ' разбанен в мире '
 noWorldPermission: 'У вас нет прав для игры в этом мире.'
+noPermission: 'У вас нет прав на выполнение этой команды.'
 worldListIsWhiteList: false

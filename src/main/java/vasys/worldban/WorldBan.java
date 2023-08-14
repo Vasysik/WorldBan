@@ -10,7 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -80,15 +79,13 @@ public class WorldBan extends JavaPlugin implements Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
         if (command.getName().equalsIgnoreCase("worldban")) {
+            Player send = (Player) sender;
             if (sender instanceof Player) {
-                Player send = (Player) sender;
                 if (!send.hasPermission("worldban.worldban")) {
-                    send.sendRawMessage("У вас нет прав на выполнение этой команды.");
+                    send.sendRawMessage(getConfig().getString("noPermission"));
                     return true;
                 }
             }
-            Player player = getServer().getPlayer(args[0]);
-            PermissionAttachment attachment = player.addAttachment(this);
             if (args.length != 2) {
                 return false;
             }
@@ -101,15 +98,20 @@ public class WorldBan extends JavaPlugin implements Listener {
                 }
                 else {
                     comand = "lp user " + args[0] + " permission set " + permission + " true";
+                }
+                send.sendRawMessage(args[0] + getConfig().getString("banPlayerMessage") + args[1]);
+                Player player = getServer().getPlayer(args[0]);
+                if (player != null) {
+                    player.sendRawMessage(getConfig().getString("banMessage") + args[1]);
                 }
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), comand);
             }
         }
         if (command.getName().equalsIgnoreCase("worldpardon")) {
+            Player send = (Player) sender;
             if (sender instanceof Player) {
-                Player send = (Player) sender;
                 if (!send.hasPermission("worldban.worldpardon")) {
-                    send.sendRawMessage("У вас нет прав на выполнение этой команды.");
+                    send.sendRawMessage(getConfig().getString("noPermission"));
                     return true;
                 }
             }
@@ -125,6 +127,11 @@ public class WorldBan extends JavaPlugin implements Listener {
                 }
                 else {
                     comand = "lp user " + args[0] + " permission set " + permission + " false";
+                }
+                send.sendRawMessage(args[0] + getConfig().getString("pardonPlayerMessage") + args[1]);
+                Player player = getServer().getPlayer(args[0]);
+                if (player != null) {
+                    player.sendRawMessage(getConfig().getString("pardonMessage") + args[1]);
                 }
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), comand);
             }
