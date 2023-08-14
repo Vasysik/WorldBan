@@ -7,3 +7,6 @@ commands:
   worldban:
     description: Ban players in worlds
     usage: /worldban <player> <world>
+  worldpardon:
+    description: Unban players in worlds
+    usage: /worldpardon <player> <world>

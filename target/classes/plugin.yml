@@ -1,5 +1,5 @@
 name: WorldBan
-version: '1.10-SNAPSHOT'
+version: '1.12-SNAPSHOT'
 main: vasys.worldban.WorldBan
 api-version: '1.20'
 authors: [ Vasys ]

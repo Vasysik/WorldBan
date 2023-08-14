@@ -1,5 +1,6 @@
 package vasys.worldban;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -87,20 +88,17 @@ public class WorldBan extends JavaPlugin implements Listener {
             }
             Player player = getServer().getPlayer(args[0]);
             PermissionAttachment attachment = player.addAttachment(this);
-
-            if (getConfig().getBoolean("worldListIsWhiteList")) {
-                if (worlds.contains(args[1])) {
-                    String permission = "worldban.world." + args[1];
-                    if (getConfig().getString(args[1]) != null) permission = getConfig().getString(args[1]);
-                    attachment.setPermission(permission, false);
+            if (worlds.contains(args[1])) {
+                String permission = "worldban.world." + args[1];
+                if (getConfig().getString(args[1]) != null) permission = getConfig().getString(args[1]);
+                String comand = "";
+                if (getConfig().getBoolean("worldListIsWhiteList")) {
+                    comand = "lp user " + args[0] + " permission set " + permission + " false";
                 }
-            }
-            else {
-                if (worlds.contains(args[1])) {
-                    String permission = "worldban.world." + args[1];
-                    if (getConfig().getString(args[1]) != null) permission = getConfig().getString(args[1]);
-                    attachment.setPermission(permission, true);
+                else {
+                    comand = "lp user " + args[0] + " permission set " + permission + " true";
                 }
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), comand);
             }
         }
         if (command.getName().equalsIgnoreCase("worldpardon")) {
@@ -110,22 +108,18 @@ public class WorldBan extends JavaPlugin implements Listener {
                     return false;
                 }
             }
-            Player player = getServer().getPlayer(args[0]);
-            PermissionAttachment attachment = player.addAttachment(this);
 
-            if (getConfig().getBoolean("worldListIsWhiteList")) {
-                if (worlds.contains(args[1])) {
-                    String permission = "worldban.world." + args[1];
-                    if (getConfig().getString(args[1]) != null) permission = getConfig().getString(args[1]);
-                    attachment.setPermission(permission, true);
+            if (worlds.contains(args[1])) {
+                String permission = "worldban.world." + args[1];
+                if (getConfig().getString(args[1]) != null) permission = getConfig().getString(args[1]);
+                String comand = "";
+                if (getConfig().getBoolean("worldListIsWhiteList")) {
+                    comand = "lp user " + args[0] + " permission set " + permission + " true";
                 }
-            }
-            else {
-                if (worlds.contains(args[1])) {
-                    String permission = "worldban.world." + args[1];
-                    if (getConfig().getString(args[1]) != null) permission = getConfig().getString(args[1]);
-                    attachment.setPermission(permission, false);
+                else {
+                    comand = "lp user " + args[0] + " permission set " + permission + " false";
                 }
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), comand);
             }
         }
         return true;
