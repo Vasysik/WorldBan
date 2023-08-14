@@ -10,10 +10,11 @@ lobbyCordX: 0
 lobbyCordY: 0
 lobbyCordZ: 0
 
-banMessage: 'Вы забанены в мире '
-banPlayerMessage: ' забанен в мире '
-pardonMessage: 'Вы разбанены в мире '
-pardonPlayerMessage: ' разбанен в мире '
-noWorldPermission: 'У вас нет прав для игры в этом мире.'
-noPermission: 'У вас нет прав на выполнение этой команды.'
+banMessage: 'You are banned in the world '
+banPlayerMessage: ' banned in the world '
+pardonMessage: 'You are unbanned in the world '
+pardonPlayerMessage: ' unbanned in the world '
+noWorldPermission: 'You have not permissions to play in this world.'
+noPermission: 'You do not have permission to execute this command.'
+
 worldListIsWhiteList: false
