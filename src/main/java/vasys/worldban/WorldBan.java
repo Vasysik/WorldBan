@@ -20,7 +20,6 @@ import java.util.UUID;
 public class WorldBan extends JavaPlugin implements Listener {
 
     List<String> worlds = new ArrayList<>();
-    Location lobby = getServer().getWorld(getConfig().getString("lobby")).getSpawnLocation();
     @Override
     public void onEnable() {
         saveDefaultConfig();
@@ -42,13 +41,13 @@ public class WorldBan extends JavaPlugin implements Listener {
             if (getConfig().getString(world) != null) permission = getConfig().getString(world);
             if (getConfig().getBoolean("worldListIsWhiteList")) {
                 if (!player.hasPermission(permission)){
-                    player.teleport(lobby);
+                    player.teleport(getServer().getWorld(getConfig().getString("lobby")).getSpawnLocation());
                     player.sendRawMessage(getConfig().getString("noWorldPermission"));
                 }
             }
             else {
                 if (player.hasPermission(permission)){
-                    player.teleport(lobby);
+                    player.teleport(getServer().getWorld(getConfig().getString("lobby")).getSpawnLocation());
                     player.sendRawMessage(getConfig().getString("noWorldPermission"));
                 }
             }
@@ -64,13 +63,13 @@ public class WorldBan extends JavaPlugin implements Listener {
             if (getConfig().getString(world) != null) permission = getConfig().getString(world);
             if (getConfig().getBoolean("worldListIsWhiteList")) {
                 if (!player.hasPermission(permission)){
-                    player.teleport(lobby);
+                    player.teleport(getServer().getWorld(getConfig().getString("lobby")).getSpawnLocation());
                     player.sendRawMessage(getConfig().getString("noWorldPermission"));
                 }
             }
             else {
                 if (player.hasPermission(permission)){
-                    player.teleport(lobby);
+                    player.teleport(getServer().getWorld(getConfig().getString("lobby")).getSpawnLocation());
                     player.sendRawMessage(getConfig().getString("noWorldPermission"));
                 }
             }
@@ -107,7 +106,7 @@ public class WorldBan extends JavaPlugin implements Listener {
                 Player player = getServer().getPlayer(uuid);
                 if (player != null) {
                     player.sendRawMessage(getConfig().getString("banMessage") + args[1]);
-                    player.teleport(lobby);
+                    player.teleport(getServer().getWorld(getConfig().getString("lobby")).getSpawnLocation());
                 }
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), comand);
             }
