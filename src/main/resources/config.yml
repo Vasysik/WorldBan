@@ -4,11 +4,7 @@ worldList:
 
 world: 'group.player'
 
-
 lobby: 'world'
-lobbyCordX: 0
-lobbyCordY: 0
-lobbyCordZ: 0
 
 banMessage: 'You are banned in the world '
 banPlayerMessage: ' banned in the world '

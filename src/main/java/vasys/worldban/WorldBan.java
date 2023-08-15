@@ -1,6 +1,7 @@
 package vasys.worldban;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -14,12 +15,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class WorldBan extends JavaPlugin implements Listener {
 
     List<String> worlds = new ArrayList<>();
-    World lobbyWorld = getServer().getWorld(getConfig().getString("lobby"));
-    Location lobby = new Location(lobbyWorld, getConfig().getDouble("lobbyCordX"), getConfig().getDouble("lobbyCordY"), getConfig().getDouble("lobbyCordZ"));
+    //World lobbyWorld = getServer().getWorld(getConfig().getString("lobby"));
+    //Location lobby = new Location(lobbyWorld, getConfig().getDouble("lobbyCordX"), getConfig().getDouble("lobbyCordY"), getConfig().getDouble("lobbyCordZ"));
+    Location lobby = Bukkit.getWorld(getConfig().getString("lobby")).getSpawnLocation();
     @Override
     public void onEnable() {
         saveDefaultConfig();
@@ -80,6 +83,8 @@ public class WorldBan extends JavaPlugin implements Listener {
     public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
         if (command.getName().equalsIgnoreCase("worldban")) {
             Player send = null;
+            UUID uuid = getServer().getOfflinePlayer(args[0]).getUniqueId();
+            String uuidStr = uuid.toString();
             if (getServer().getPlayer(sender.getName()) != null) send = getServer().getPlayer(sender.getName());
             if (sender instanceof Player) {
                 if (!send.hasPermission("worldban.worldban") & send != null) {
@@ -95,24 +100,24 @@ public class WorldBan extends JavaPlugin implements Listener {
                 if (getConfig().getString(args[1]) != null) permission = getConfig().getString(args[1]);
                 String comand = "";
                 if (getConfig().getBoolean("worldListIsWhiteList")) {
-                    comand = "lp user " + args[0] + " permission set " + permission + " false";
+                    comand = "lp user " + uuidStr + " permission set " + permission + " false";
                 }
                 else {
-                    comand = "lp user " + args[0] + " permission set " + permission + " true";
+                    comand = "lp user " + uuidStr + " permission set " + permission + " true";
                 }
                 if (send != null) send.sendRawMessage(args[0] + getConfig().getString("banPlayerMessage") + args[1]);
-                Player player = getServer().getPlayer(args[0]);
+                Player player = getServer().getPlayer(uuid);
                 if (player != null) {
                     player.sendRawMessage(getConfig().getString("banMessage") + args[1]);
-                    if (player.getWorld() == getServer().getWorld(args[1])) {
-                        player.teleport(lobby);
-                    }
+                    player.teleport(lobby);
                 }
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), comand);
             }
         }
         if (command.getName().equalsIgnoreCase("worldpardon")) {
             Player send = null;
+            UUID uuid = getServer().getOfflinePlayer(args[0]).getUniqueId();
+            String uuidStr = uuid.toString();
             if (getServer().getPlayer(sender.getName()) != null) send = getServer().getPlayer(sender.getName());
             if (sender instanceof Player) {
                 if (!send.hasPermission("worldban.worldpardon") & send != null) {
@@ -128,13 +133,13 @@ public class WorldBan extends JavaPlugin implements Listener {
                 if (getConfig().getString(args[1]) != null) permission = getConfig().getString(args[1]);
                 String comand = "";
                 if (getConfig().getBoolean("worldListIsWhiteList")) {
-                    comand = "lp user " + args[0] + " permission set " + permission + " true";
+                    comand = "lp user " + uuidStr + " permission set " + permission + " true";
                 }
                 else {
-                    comand = "lp user " + args[0] + " permission set " + permission + " false";
+                    comand = "lp user " + uuidStr + " permission set " + permission + " false";
                 }
                 if (send != null) send.sendRawMessage(args[0] + getConfig().getString("pardonPlayerMessage") + args[1]);
-                Player player = getServer().getPlayer(args[0]);
+                Player player = getServer().getPlayer(uuid);
                 if (player != null) {
                     player.sendRawMessage(getConfig().getString("pardonMessage") + args[1]);
                 }
