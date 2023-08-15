@@ -20,8 +20,6 @@ import java.util.UUID;
 public class WorldBan extends JavaPlugin implements Listener {
 
     List<String> worlds = new ArrayList<>();
-    //World lobbyWorld = getServer().getWorld(getConfig().getString("lobby"));
-    //Location lobby = new Location(lobbyWorld, getConfig().getDouble("lobbyCordX"), getConfig().getDouble("lobbyCordY"), getConfig().getDouble("lobbyCordZ"));
     Location lobby = getServer().getWorld(getConfig().getString("lobby")).getSpawnLocation();
     @Override
     public void onEnable() {
