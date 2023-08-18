@@ -4,7 +4,7 @@ worldList:
   - 'world_the_end'
 
 #By default, when banning, the worldban.world.<worldname> 
-permission is used, but it can be replaced with your own.
+#permission is used, but it can be replaced with your own.
 #world_nether: 'group.player'
 
 #The world where the player will be moved to when banned in one of the worlds.
