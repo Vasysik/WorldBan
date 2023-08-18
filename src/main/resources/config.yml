@@ -1,9 +1,13 @@
+#List of worlds where you can ban a player
 worldList:
   - 'world_nether'
   - 'world_the_end'
 
-world: 'group.player'
+#By default, when banning, the worldban.world.<worldname> 
+permission is used, but it can be replaced with your own.
+#world_nether: 'group.player'
 
+#The world where the player will be moved to when banned in one of the worlds.
 lobby: 'world'
 
 banMessage: 'You are banned in the world '
@@ -13,4 +17,5 @@ pardonPlayerMessage: ' unbanned in the world '
 noWorldPermission: 'You have not permissions to play in this world.'
 noPermission: 'You do not have permission to execute this command.'
 
+#Determines whether the role set for the world ban will work as a whitelist.
 worldListIsWhiteList: false
