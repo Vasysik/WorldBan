@@ -100,8 +100,6 @@ public class WorldBan extends JavaPlugin implements Listener {
     public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
         if (command.getName().equalsIgnoreCase("worldban")) {
             Player send = null;
-            UUID uuid = getServer().getOfflinePlayer(args[0]).getUniqueId();
-            String uuidStr = uuid.toString();
             if (getServer().getPlayer(sender.getName()) != null) send = getServer().getPlayer(sender.getName());
             if (sender instanceof Player) {
                 if (!send.hasPermission("worldban.worldban") & send != null) {
@@ -111,6 +109,14 @@ public class WorldBan extends JavaPlugin implements Listener {
             }
             if (args.length != 2) {
                 return false;
+            }
+            UUID uuid = getServer().getOfflinePlayer(args[0]).getUniqueId();
+            String uuidStr = uuid.toString();
+            Player player = getServer().getPlayer(uuid);
+            char c = args[0].charAt(0);
+            if (c != '.') {
+                uuidStr = args[0];
+                player = getServer().getPlayer(args[0]);
             }
             if (worlds.contains(args[1])) {
                 String permission = "worldban.world." + args[1];
@@ -123,7 +129,7 @@ public class WorldBan extends JavaPlugin implements Listener {
                     comand = "lp user " + uuidStr + " permission set " + permission + " true";
                 }
                 if (send != null) send.sendRawMessage(args[0] + getConfig().getString("banPlayerMessage") + args[1]);
-                Player player = getServer().getPlayer(uuid);
+
                 if (player != null) {
                     player.sendRawMessage(getConfig().getString("banMessage") + args[1]);
                     player.teleport(getServer().getWorld(getConfig().getString("lobby")).getSpawnLocation());
@@ -133,8 +139,6 @@ public class WorldBan extends JavaPlugin implements Listener {
         }
         if (command.getName().equalsIgnoreCase("worldpardon")) {
             Player send = null;
-            UUID uuid = getServer().getOfflinePlayer(args[0]).getUniqueId();
-            String uuidStr = uuid.toString();
             if (getServer().getPlayer(sender.getName()) != null) send = getServer().getPlayer(sender.getName());
             if (sender instanceof Player) {
                 if (!send.hasPermission("worldban.worldpardon") & send != null) {
@@ -144,6 +148,14 @@ public class WorldBan extends JavaPlugin implements Listener {
             }
             if (args.length != 2) {
                 return false;
+            }
+            UUID uuid = getServer().getOfflinePlayer(args[0]).getUniqueId();
+            String uuidStr = uuid.toString();
+            Player player = getServer().getPlayer(uuid);
+            char c = args[0].charAt(0);
+            if (c != '.') {
+                uuidStr = args[0];
+                player = getServer().getPlayer(args[0]);
             }
             if (worlds.contains(args[1])) {
                 String permission = "worldban.world." + args[1];
@@ -156,7 +168,6 @@ public class WorldBan extends JavaPlugin implements Listener {
                     comand = "lp user " + uuidStr + " permission set " + permission + " false";
                 }
                 if (send != null) send.sendRawMessage(args[0] + getConfig().getString("pardonPlayerMessage") + args[1]);
-                Player player = getServer().getPlayer(uuid);
                 if (player != null) {
                     player.sendRawMessage(getConfig().getString("pardonMessage") + args[1]);
                 }
