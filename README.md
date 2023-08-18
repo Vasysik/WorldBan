@@ -9,17 +9,13 @@ Simple world ban plugin.
 
 # Commands
 /worldban - command to ban a player in a certain world.
-
-Use: /worldban <player_name> <world_name>
-
-Permission: worldban.worldban
+- Use: /worldban <player_name> <world_name>
+- Permission: worldban.worldban
 
 /worldpardon - command to unban a player in a specific world.
+- Use: /worldpardon <player_name> <world_name>
+- Permission: worldban.worldpardon
 
-Use: /worldpardon <player_name> <world_name>
-
-Permission: worldban.worldpardon
 # Requirements
-Paper 1.20.x
-
-LuckPerms 5.4.x
+- Paper 1.20.x
+- LuckPerms 5.4.x
