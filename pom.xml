@@ -35,7 +35,7 @@
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
-                            <shadedPattern>me.vasys.worldban</shadedPattern>
+                            <shadedPattern>vasys.worldban</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
