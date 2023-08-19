@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerResourcePackStatusEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bstats.bukkit.Metrics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,8 @@ public class WorldBan extends JavaPlugin implements Listener {
     List<String> worlds = new ArrayList<>();
     @Override
     public void onEnable() {
+        int pluginId = 19576;
+        Metrics metrics = new Metrics(this, pluginId);
         saveDefaultConfig();
         getServer().getPluginManager().registerEvents(this, this);
         worlds = getConfig().getStringList("worldList");

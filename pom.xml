@@ -6,7 +6,7 @@
 
     <groupId>vasys</groupId>
     <artifactId>WorldBan</artifactId>
-    <version>1.13.16-BETA</version>
+    <version>1.14.0-BETA</version>
     <packaging>jar</packaging>
 
     <name>WorldBan</name>
@@ -31,6 +31,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.2.4</version>
+                <configuration>
+                    <relocations>
+                        <relocation>
+                            <pattern>org.bstats</pattern>
+                            <shadedPattern>me.vasys.worldban</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -75,6 +83,12 @@
             <artifactId>api</artifactId>
             <version>5.4</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>3.0.2</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
